@@ -15,21 +15,41 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Password is required"]
     },
-    otp: {
-        type: String
-    },
-    otpExpires: {
-        type: Date
-    },
+
+    otp: String,
+    otpExpires: Date,
+
     isVerified: {
         type: Boolean,
         default: false
     },
+
     profileImage: {
         type: String
-    }
-}, { timestamps: true });
+    },
 
+    coverImages: {
+        type: [String],   
+        default: []
+    },
+
+    gallery: {
+        type: [String],   
+        default: []
+    },
+
+    role: {
+        type: String,
+        enum: ["user", "admin"],
+        default: "user"
+    },
+
+    visitCount: {
+        type: Number,
+        default: 0
+    }
+
+}, { timestamps: true });
 
 userSchema.pre("save", function (next) {
     if (this.isModified("password")) {

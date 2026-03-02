@@ -21,7 +21,7 @@ connectDB();
 
 
 app.use("/api/auth", authRoutes);
-app.use("/api/messages", messageRoutes);
+app.use("/api/messages", messageRoutes.default || messageRoutes);
 
 
 app.get("/", (req, res) => {
